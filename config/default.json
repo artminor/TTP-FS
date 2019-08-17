@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://jun:junchen@stockportfolio-syzon.mongodb.net/test?retryWrites=true&w=majority"
+}
