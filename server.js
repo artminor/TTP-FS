@@ -8,6 +8,11 @@ connectDB();
 //test
 app.get('/', (req, res) => res.send('api running'));
 
+//define routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/portfolio', require('./routes/api/portfolio'));
+
 //set port to 5000
 const PORT = process.env.PORT || 5000;
 
