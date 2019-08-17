@@ -6,6 +6,10 @@ const app = express();
 connectDB();
 
 //test
+//should be able to get req body through express
+app.use(express.json({
+    extended: false
+}));
 app.get('/', (req, res) => res.send('api running'));
 
 //define routes
