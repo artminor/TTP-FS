@@ -34,15 +34,11 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
-/*
-//@route    POST api portfolio/stock
-//@desc     add portfolio stock
+
+//@route    POST api/portfolio
+//@desc     add or update portfolio
 //@access   Private
-router.post('/portfolio/stock', [auth,
-    [check('ticker', 'Ticker symbol is required').not().isEmpty(),
-        check('shares', 'Number of shares symbol is required').not().isEmpty()
-    ]
-], async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -50,34 +46,16 @@ router.post('/portfolio/stock', [auth,
         });
     }
 
-    //fix salePrice with api
-    let salePrice = 0;
+    const {} = req.body;
 
-    const {
-        ticker,
-        shares
-    } = req.body;
-
-
-    const newStock = {
-        ticker,
-        shares,
-        salePrice
-    }
-
-
-    //build portfolio object
+    // //build portfolio object
     const portfolioFields = {};
     portfolioFields.user = req.user.id;
-    if (!stock) portfolioFields.stock = [];
-    if (stock) portfolioFields.stock = stock;
 
     try {
-        const portfolio = await Portfolio.findOne({
+        let portfolio = await Portfolio.findOne({
             user: req.user.id
         });
-
-        portfolio.stock.unshift(newStock);
 
         if (portfolio) {
             //update
@@ -90,8 +68,8 @@ router.post('/portfolio/stock', [auth,
             });
             return res.json(portfolio);
         }
-
-
+        console.log(portfolio);
+        //create portfolio
         portfolio = new Portfolio(portfolioFields);
         await portfolio.save();
 
@@ -104,6 +82,34 @@ router.post('/portfolio/stock', [auth,
 
 });
 
-*/
+// @route    GET api/portfolio/user/:user_id
+// @desc     Get portfolio by user ID
+// @access   Public
+router.get('/user/:user_id', async (req, res) => {
+    try {
+        //find user by id with id from url
+        const portfolio = await Portfolio.findOne({
+            user: req.params.user_id
+        }).populate('user', ['name']);
+
+        if (!portfolio) return res.status(400).json({
+            msg: 'portfolio not found'
+        });
+
+        res.json(portfolio);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({
+                msg: 'portfolio not found'
+            });
+        }
+        res.status(500).send('Server Error');
+    }
+});
+
+
+
+
 
 module.exports = router;
