@@ -10,7 +10,6 @@ const App = () => (
   <Router>
     <Fragment>
       <Navbar />
-      <Route exact path="/login" component={Login} />
       <section className="container">
         <Switch>
           <Route exact path="/register" component={Register} />
