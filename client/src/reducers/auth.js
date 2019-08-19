@@ -1,6 +1,8 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
   USER_LOADED,
   AUTH_ERROR
 } from '../actions/types';
@@ -29,6 +31,7 @@ export default function(state = initialState, action) {
       };
 
     case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
       // case LOGIN_SUCCESS, set token
       localStorage.setItem('token', payload.token);
       //current state
@@ -40,6 +43,7 @@ export default function(state = initialState, action) {
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:
+    case LOGIN_FAIL:
       //remove everything in storage from that token
       localStorage.removeItem('token');
       //without payload

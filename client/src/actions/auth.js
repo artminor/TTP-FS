@@ -3,6 +3,8 @@ import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
   USER_LOADED,
   AUTH_ERROR
 } from './types';
@@ -48,6 +50,8 @@ export const register = ({ name, email, password }) => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
+
+    dispatch(loadUser());
   } catch (err) {
     //display errors, show alerts for each
     const errors = err.response.data.errors;
@@ -57,6 +61,44 @@ export const register = ({ name, email, password }) => async dispatch => {
 
     dispatch({
       type: REGISTER_FAIL
+    });
+  }
+};
+
+//login user
+export const login = (email, password) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  //prepare data to send
+  const body = JSON.stringify({
+    email,
+    password
+  });
+
+  try {
+    //get response from axios post request
+    const res = await axios.post('/api/auth', body, config);
+
+    //payload would be token if login success
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data
+    });
+
+    dispatch(loadUser());
+  } catch (err) {
+    //display errors, show alerts for each
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(err.msg, 'danger')));
+    }
+
+    dispatch({
+      type: LOGIN_FAIL
     });
   }
 };
