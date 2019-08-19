@@ -108,8 +108,49 @@ router.get('/user/:user_id', async (req, res) => {
     }
 });
 
+//@route    PUT api/portfolio/stock
+//@desc     add stock
+//@access   Private
+router.put('/stock', [auth, [
+    check('ticker', 'ticker symbol is required').not().isEmpty(),
+    check('shares', 'number of shares is required').not().isEmpty(),
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors: errors.array()
+        });
+    }
 
+    const {
+        ticker,
+        shares
+    } = req.body;
 
+    let salePrice = 1000;
+
+    const newStock = {
+        ticker,
+        shares,
+        salePrice
+    }
+
+    try {
+        const portfolio = await Portfolio.findOne({
+            user: req.user.id
+        });
+
+        portfolio.stock.unshift(newStock);
+
+        await portfolio.save();
+
+        res.json(portfolio);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+
+});
 
 
 module.exports = router;
