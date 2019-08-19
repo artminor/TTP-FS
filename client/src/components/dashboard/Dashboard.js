@@ -1,13 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentPort } from '../../actions/portfolio';
+import Spinner from '../auth/Spinner';
+import { Link } from 'react-router-dom';
 
-const Dashboard = ({ getCurrentPort, auth, porfolio }) => {
+const Dashboard = ({
+  getCurrentPort,
+  auth: { user },
+  portfolio: { portfolio, loading }
+}) => {
   useEffect(() => {
     getCurrentPort();
   }, []);
-  return <div>Dashboard</div>;
+  return loading && portfolio == null ? (
+    <Spinner />
+  ) : (
+    <Fragment>
+      <p className="lead">
+        <i className="fas fa-user">
+          {' '}
+          Hi {user && user.name}, you have ${user && user.cash}
+        </i>
+      </p>
+      {portfolio !== null ? (
+        <Fragment>has port</Fragment>
+      ) : (
+        <Fragment>
+          <p>You have no stocks, please buy some stocks.</p>
+          <Link to="/create-portfolio" className="btn btn-primary my-1">
+            Create Portfolio
+          </Link>
+        </Fragment>
+      )}
+    </Fragment>
+  );
 };
 
 Dashboard.propTypes = {

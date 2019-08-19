@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { setAlert } from './alert';
+import {
+  setAlert
+} from './alert';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -7,7 +9,8 @@ import {
   LOGIN_FAIL,
   USER_LOADED,
   AUTH_ERROR,
-  LOGOUT
+  LOGOUT,
+  CLEAR_PORTFOLIO
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -21,14 +24,23 @@ export const loadUser = () => async dispatch => {
   try {
     //load user data or dispatch
     const res = await axios.get('/api/auth');
-    dispatch({ type: USER_LOADED, payload: res.data });
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    });
   } catch (err) {
-    dispatch({ type: AUTH_ERROR });
+    dispatch({
+      type: AUTH_ERROR
+    });
   }
 };
 
 //resgiter user
-export const register = ({ name, email, password }) => async dispatch => {
+export const register = ({
+  name,
+  email,
+  password
+}) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -106,5 +118,10 @@ export const login = (email, password) => async dispatch => {
 
 //clear profile and logout
 export const logout = () => dispatch => {
-  dispatch({ type: LOGOUT });
+  dispatch({
+    type: CLEAR_PORTFOLIO
+  });
+  dispatch({
+    type: LOGOUT
+  });
 };

@@ -9,3 +9,4 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GET_PORTFOLIO = 'GET_PORTFOLIO';
 export const PORTFOLIO_ERROR = 'PORTFOLIO_ERROR';
+export const CLEAR_PORTFOLIO = 'CLEAR_PORTFOLIO';
