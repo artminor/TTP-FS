@@ -1,16 +1,40 @@
-import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from '../actions/types';
 
-const initialState = [];
+const initialState = {
+  //store token in local storage
+  token: localStorage.getItem('token'),
+  //if success authenticated = true
+  isAuthenticated: null,
+  //if response loaded then loading status = false
+  loading: true,
+  user: null
+};
 
 export default function(state = initialState, action) {
-  //type mendatory
+  //destructure
   const { type, payload } = action;
 
   switch (type) {
-    case SET_ALERT:
-      return [...state, payload];
-    case REMOVE_ALERT:
-      return state.filter(alert => alert.id !== payload);
+    case REGISTER_SUCCESS:
+      // case LOGIN_SUCCESS, set token
+      localStorage.setItem('token', payload.token);
+      //current state
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false
+      };
+    case REGISTER_FAIL:
+      //remove everything in storage from that token
+      localStorage.removeItem('token');
+      //without payload
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false
+      };
     default:
       return state;
   }
