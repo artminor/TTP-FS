@@ -20,7 +20,7 @@ const Dashboard = ({
       <p className="lead">
         <i className="fas fa-user">
           {' '}
-          Hi {user && user.name}, you have ${user && user.cash}
+          Hi {user && user.name}, you have ${user && user.cash.toFixed(2)}
         </i>
       </p>
       {portfolio !== null ? (

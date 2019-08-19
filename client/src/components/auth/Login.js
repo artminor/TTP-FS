@@ -16,7 +16,10 @@ const Login = ({ login, isAuthenticated }) => {
   const { email, password } = formData;
 
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -31,8 +34,8 @@ const Login = ({ login, isAuthenticated }) => {
   return (
     <Fragment>
       <p className="lead">
-        <i className="fas fa-user" /> Sign into Your Account
-      </p>
+        <i className="fas fa-user" /> Sign into Your Account{' '}
+      </p>{' '}
       <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <input
@@ -43,7 +46,7 @@ const Login = ({ login, isAuthenticated }) => {
             onChange={e => onChange(e)}
             required
           />
-        </div>
+        </div>{' '}
         <div className="form-group">
           <input
             type="password"
@@ -55,12 +58,12 @@ const Login = ({ login, isAuthenticated }) => {
             required
           />
         </div>
-
         <input type="submit" className="btn btn-primary" value="Login" />
-      </form>
+      </form>{' '}
       <p className="my-1">
-        Don't have an account? <Link to="/register">Sign Up</Link>
-      </p>
+        Don 't have an account? <Link to="/register">Sign Up</Link>{' '}
+      </p>{' '}
+      <a href="https://iexcloud.io"> Data provided by IEX Cloud </a>{' '}
     </Fragment>
   );
 };
@@ -76,5 +79,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login }
+  {
+    login
+  }
 )(Login);

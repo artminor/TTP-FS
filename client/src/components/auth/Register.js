@@ -19,14 +19,21 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const { name, email, password, password2 } = formData;
 
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
 
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
       setAlert('passwords do not match', 'danger');
     } else {
-      register({ name, email, password });
+      register({
+        name,
+        email,
+        password
+      });
     }
   };
 
@@ -38,8 +45,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
     <Fragment>
       <p className="lead">
-        <i className="fas fa-user" /> Create Your Account
-      </p>
+        <i className="fas fa-user" /> Create Your Account{' '}
+      </p>{' '}
       <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <input
@@ -50,7 +57,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             onChange={e => onChange(e)}
             required
           />
-        </div>
+        </div>{' '}
         <div className="form-group">
           <input
             type="email"
@@ -60,7 +67,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             onChange={e => onChange(e)}
             required
           />
-        </div>
+        </div>{' '}
         <div className="form-group">
           <input
             type="password"
@@ -71,7 +78,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             minLength="8"
             required
           />
-        </div>
+        </div>{' '}
         <div className="form-group">
           <input
             type="password"
@@ -82,12 +89,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             minLength="8"
             required
           />
-        </div>
+        </div>{' '}
         <input type="submit" className="btn btn-primary" value="Register" />
-      </form>
+      </form>{' '}
       <p className="my-1">
-        Already have an account? <Link to="login.html">Sign In</Link>
-      </p>
+        Already have an account ? <Link to="login.html"> Sign In </Link>{' '}
+      </p>{' '}
     </Fragment>
   );
 };
@@ -104,5 +111,8 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setAlert, register }
+  {
+    setAlert,
+    register
+  }
 )(Register);

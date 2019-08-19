@@ -8,7 +8,10 @@ const {
     validationResult
 } = require('express-validator');
 //iex
-const iexAPI = 'https://cloud.iexapis.com/stable';
+const request = require('request');
+const config = require('config');
+// const iexAPI = 'https://cloud.iexapis.com/stable';
+//pk_8681342999224df5bd6d757c1bd69566
 
 //@route    GET api/portfolio/me
 //@desc     Get current user portfolio
@@ -127,9 +130,11 @@ router.put('/stock', [auth, [
         shares
     } = req.body;
 
-    let salePrice = 1000;
 
-    const newStock = {
+
+    let salePrice = 100;
+
+    let newStock = {
         ticker,
         shares,
         salePrice
@@ -149,8 +154,48 @@ router.put('/stock', [auth, [
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-
 });
 
+//@route    GET api/portfolio/iexStocks
+//@desc     get stocks from iex api
+//@access   Public
+// router.get('/iexStocks', (req, res) => {
+//     try {
+//         let stocks = [];
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+
+// let getStockPrice = (ticker) => {
+//     let price = 0;
+//     try {
+//         let buyStock = {
+//             uri: `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
+//             method: 'GET'
+//         };
+
+//         request(buyStock, (error, response, body) => {
+//             if (error) console.error(error);
+
+//             if (response.statusCode !== 200) {
+//                 return response.status(404).json({
+//                     msg: 'No stock found for such ticker'
+//                 });
+//             }
+//             console.log(body);
+//             const obj = JSON.parse(body);
+//             price = Number((Object.values(obj)[10]));
+//             console.log(price);
+
+//             response.json(JSON.parse(body));
+//         });
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// }
 
 module.exports = router;
