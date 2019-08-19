@@ -4,6 +4,8 @@ import Navbar from './components/auth/Navbar';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alert from './components/auth/Alert';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 //redux
 //provider connects react-redux
 import { Provider } from 'react-redux';
@@ -29,12 +31,13 @@ const App = () => {
           <section className="container">
             <Alert />
             <Switch>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-            </Switch>
-          </section>
-        </Fragment>
-      </Router>
+              <Route exact path="/register" component={Register} />{' '}
+              <Route exact path="/login" component={Login} />{' '}
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />{' '}
+            </Switch>{' '}
+          </section>{' '}
+        </Fragment>{' '}
+      </Router>{' '}
     </Provider>
   );
 };

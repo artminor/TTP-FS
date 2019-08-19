@@ -7,6 +7,8 @@ const {
     check,
     validationResult
 } = require('express-validator');
+//iex
+const iexAPI = 'https://cloud.iexapis.com/stable';
 
 //@route    GET api/portfolio/me
 //@desc     Get current user portfolio
