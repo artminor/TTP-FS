@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import CreatePortfolio from './components/portfolio/CreatePortfolio';
 import EditPort from './components/portfolio/EditPort';
+import AddStock from './components/portfolio/AddStock';
 //redux
 //provider connects react-redux
 import { Provider } from 'react-redux';
@@ -41,11 +42,8 @@ const App = () => {
                 path="/create-portfolio"
                 component={CreatePortfolio}
               />{' '}
-              <PrivateRoute
-                exact
-                path="/edit-portfolio"
-                component={EditPort}
-              />{' '}
+              <PrivateRoute exact path="/edit-portfolio" component={EditPort} />{' '}
+              <PrivateRoute exact path="/add-stock" component={AddStock} />{' '}
             </Switch>{' '}
           </section>{' '}
         </Fragment>{' '}

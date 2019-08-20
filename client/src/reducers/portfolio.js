@@ -1,7 +1,8 @@
 import {
   GET_PORTFOLIO,
   PORTFOLIO_ERROR,
-  CLEAR_PORTFOLIO
+  CLEAR_PORTFOLIO,
+  UPDATE_PORTFOLIO
 } from '../actions/types';
 
 const initialState = {
@@ -15,6 +16,7 @@ export default function(state = initialState, action) {
 
   switch (type) {
     case GET_PORTFOLIO:
+    case UPDATE_PORTFOLIO:
       return {
         ...state,
         portfolio: payload,
