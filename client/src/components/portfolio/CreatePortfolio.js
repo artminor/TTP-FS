@@ -1,8 +1,8 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import React, { useState, Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createPortfolio, getCurrentPort } from '../../actions/portfolio';
+import { createPortfolio } from '../../actions/portfolio';
 
 const CreatePortfolio = ({ createPortfolio, history }) => {
   const [formData, setFormData] = useState({ stock: [] });

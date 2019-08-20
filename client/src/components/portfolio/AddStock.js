@@ -65,4 +65,4 @@ AddStock.propTypes = {
 export default connect(
   null,
   { addStock }
-)(AddStock);
+)(withRouter(AddStock));
