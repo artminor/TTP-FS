@@ -4,14 +4,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPortfolio, getCurrentPort } from '../../actions/portfolio';
 
-const CreatePortfolio = ({ createPortfolio, history }) => {
+const EditPort = ({
+  portfolio: { portfolio, loading },
+  createPortfolio,
+  getCurrentPort,
+  history
+}) => {
   const [formData, setFormData] = useState({ stock: [] });
   const { stock } = formData;
 
   const onSubmit = e => {
     e.preventDefault();
-    createPortfolio(formData, history);
+    createPortfolio(formData, history, true);
   };
+
+  useEffect(() => {
+    getCurrentPort();
+    setFormData({
+      stock: loading || !portfolio.stock ? '' : portfolio.stock
+    });
+  }, [loading]);
 
   return (
     <Fragment>
@@ -27,11 +39,17 @@ const CreatePortfolio = ({ createPortfolio, history }) => {
   );
 };
 
-CreatePortfolio.propTypes = {
-  createPortfolio: PropTypes.func.isRequired
+EditPort.propTypes = {
+  createPortfolio: PropTypes.func.isRequired,
+  getCurrentPort: PropTypes.func.isRequired,
+  portfolio: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  protfolio: state.portfolio
+});
+
 export default connect(
-  null,
-  { createPortfolio }
-)(withRouter(CreatePortfolio));
+  mapStateToProps,
+  { createPortfolio, getCurrentPort }
+)(withRouter(EditPort));

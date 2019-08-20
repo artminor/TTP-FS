@@ -26,7 +26,7 @@ const Dashboard = ({
       </p>
       {portfolio !== null ? (
         <Fragment>
-          <DashboardActions />
+            <DashboardActions />
         </Fragment>
       ) : (
         <Fragment>

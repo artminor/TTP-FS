@@ -7,6 +7,7 @@ import Alert from './components/auth/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import CreatePortfolio from './components/portfolio/CreatePortfolio';
+import EditPort from './components/portfolio/EditPort';
 //redux
 //provider connects react-redux
 import { Provider } from 'react-redux';
@@ -39,6 +40,11 @@ const App = () => {
                 exact
                 path="/create-portfolio"
                 component={CreatePortfolio}
+              />{' '}
+              <PrivateRoute
+                exact
+                path="/edit-portfolio"
+                component={EditPort}
               />{' '}
             </Switch>{' '}
           </section>{' '}
