@@ -5,6 +5,7 @@ import { getCurrentPort } from '../../actions/portfolio';
 import Spinner from '../auth/Spinner';
 import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
+import Stock from './Stock';
 
 const Dashboard = ({
   getCurrentPort,
@@ -26,7 +27,8 @@ const Dashboard = ({
       </p>
       {portfolio !== null ? (
         <Fragment>
-            <DashboardActions />
+          <Stock stock={portfolio.stock} />
+          <DashboardActions />
         </Fragment>
       ) : (
         <Fragment>

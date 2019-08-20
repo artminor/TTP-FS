@@ -11,7 +11,7 @@ import {
 //get user stock portfolio
 export const getCurrentPort = () => async dispatch => {
     try {
-        const res = await axios.get('/api/portfolio/me');
+        const res = await axios.get('/api/portfolio');
 
         dispatch({
             type: GET_PORTFOLIO,
