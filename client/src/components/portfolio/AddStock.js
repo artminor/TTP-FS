@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addStock } from '../../actions/portfolio';
 
-const AddStock = ({ addPortfolio, history }) => {
+const AddStock = ({ addStock, history }) => {
   const [formData, setFormData] = useState({
     ticker: '',
     shares: ''
@@ -17,17 +17,17 @@ const AddStock = ({ addPortfolio, history }) => {
 
   return (
     <Fragment>
-      <p class="lead">
-        <i class="fas fa-search-dollar" /> Purchase stocks
+      <p className="lead">
+        <i className="fas fa-search-dollar" /> Purchase stocks
       </p>
       <form
-        class="form"
+        className="form"
         onSubmit={e => {
           e.preventDefault();
           addStock(formData, history);
         }}
       >
-        <div class="form-group">
+        <div className="form-group">
           <input
             type="text"
             placeholder=" ticker symbol"
@@ -37,7 +37,7 @@ const AddStock = ({ addPortfolio, history }) => {
             required
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <input
             type="number"
             min="1"
@@ -49,10 +49,10 @@ const AddStock = ({ addPortfolio, history }) => {
           />
         </div>
 
-        <input type="submit" class="btn btn-primary my-1" />
-        <a class="btn btn-light my-1" href="dashboard.html">
+        <input type="submit" className="btn btn-primary my-1" />
+        <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
-        </a>
+        </Link>
       </form>
     </Fragment>
   );
