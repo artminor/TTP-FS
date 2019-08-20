@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCurrentPort } from '../../actions/portfolio';
 import Spinner from '../auth/Spinner';
 import { Link } from 'react-router-dom';
+import DashboardActions from './DashboardActions';
 
 const Dashboard = ({
   getCurrentPort,
@@ -24,7 +25,9 @@ const Dashboard = ({
         </i>
       </p>
       {portfolio !== null ? (
-        <Fragment>has port</Fragment>
+        <Fragment>
+          <DashboardActions />
+        </Fragment>
       ) : (
         <Fragment>
           <p>You have no stocks, please buy some stocks.</p>
