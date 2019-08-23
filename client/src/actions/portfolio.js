@@ -11,11 +11,11 @@ import {
 //get user stock portfolio
 export const getCurrentPort = () => async dispatch => {
     try {
-        const res = await axios.get('/api/portfolio');
+        const res = await axios.get('/api/portfolio/me');
 
         dispatch({
             type: GET_PORTFOLIO,
-            payload: res.datat
+            payload: res.data
         });
     } catch (err) {
         dispatch({

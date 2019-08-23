@@ -130,72 +130,117 @@ router.put('/stock', [auth, [
         shares
     } = req.body;
 
+    let buyStock = {
+        uri: `https://cloud.iexapis.com/stable/stock/GE/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
+        method: 'GET'
+    };
 
+    request(buyStock, async (error, response, body) => {
+        if (error) console.error(error);
 
-    let salePrice = 100;
+        if (response.statusCode !== 200) {
+            return response.status(404).json({
+                msg: 'No stock found for such ticker'
+            });
+        }
 
-    let newStock = {
-        ticker,
-        shares,
-        salePrice
-    }
+        const obj = JSON.parse(body);
+        // price = Number((Object.values(obj)[10]));
+        // console.log(price);
+        let salePrice = obj.latestPrice
+        let newStock = {
+            ticker,
+            shares,
+            salePrice
+        }
 
-    try {
-        const portfolio = await Portfolio.findOne({
-            user: req.user.id
+        try {
+            const portfolio = await Portfolio.findOne({
+                user: req.user.id
+            });
+
+            portfolio.stock.unshift(newStock);
+
+            await portfolio.save();
+
+            res.json(portfolio);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+        return res.status(200).json({
+            price: obj.latestPrice
         });
 
-        portfolio.stock.unshift(newStock);
+        // response.json(JSON.parse(body));
+    });
 
-        await portfolio.save();
+});
 
-        res.json(portfolio);
+//@route    GET api/portfolio/iexStocks
+//@desc     get stocks from iex api
+//@access   Public
+router.get('/iexStocks', (req, res) => {
+    try {
+        let stocks = [];
+        // let price = 0;
+        let buyStock = {
+            uri: `https://cloud.iexapis.com/stable/stock/GE/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
+            method: 'GET'
+        };
+
+        request(buyStock, (error, response, body) => {
+            if (error) console.error(error);
+
+            if (response.statusCode !== 200) {
+                return response.status(404).json({
+                    msg: 'No stock found for such ticker'
+                });
+            }
+
+            const obj = JSON.parse(body);
+            // price = Number((Object.values(obj)[10]));
+            // console.log(price);
+            return res.status(200).json({
+                price: obj.latestPrice
+            });
+
+            // response.json(JSON.parse(body));
+        });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
 
-//@route    GET api/portfolio/iexStocks
-//@desc     get stocks from iex api
-//@access   Public
-// router.get('/iexStocks', (req, res) => {
-//     try {
-//         let stocks = [];
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// });
 
+let getStockPrice = (ticker) => {
+    let price = 0;
+    try {
+        let buyStock = {
+            uri: `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
+            method: 'GET'
+        };
 
-// let getStockPrice = (ticker) => {
-//     let price = 0;
-//     try {
-//         let buyStock = {
-//             uri: `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
-//             method: 'GET'
-//         };
+        request(buyStock, (error, response, body) => {
+            if (error) console.error(error);
 
-//         request(buyStock, (error, response, body) => {
-//             if (error) console.error(error);
+            if (response.statusCode !== 200) {
+                return response.status(404).json({
+                    msg: 'No stock found for such ticker'
+                });
+            }
+            console.log(body);
+            const obj = JSON.parse(body);
+            price = Number((Object.values(obj)[10]));
+            console.log(price);
 
-//             if (response.statusCode !== 200) {
-//                 return response.status(404).json({
-//                     msg: 'No stock found for such ticker'
-//                 });
-//             }
-//             console.log(body);
-//             const obj = JSON.parse(body);
-//             price = Number((Object.values(obj)[10]));
-//             console.log(price);
-
-//             response.json(JSON.parse(body));
-//         });
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// }
+            response.json(JSON.parse(body));
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
 
 module.exports = router;
