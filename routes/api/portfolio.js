@@ -130,6 +130,7 @@ router.put('/stock', [auth, [
         shares
     } = req.body;
 
+    //pull stock info from api
     let buyStock = {
         uri: `https://cloud.iexapis.com/stable/stock/GE/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
         method: 'GET'
@@ -169,6 +170,7 @@ router.put('/stock', [auth, [
             res.status(500).send('Server Error');
         }
         return res.status(200).json({
+            //set price for salePrice input
             price: obj.latestPrice
         });
 
@@ -183,7 +185,8 @@ router.put('/stock', [auth, [
 router.get('/iexStocks', (req, res) => {
     try {
         let stocks = [];
-        // let price = 0;
+
+        //pull stock info from api
         let buyStock = {
             uri: `https://cloud.iexapis.com/stable/stock/GE/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
             method: 'GET'
@@ -202,6 +205,7 @@ router.get('/iexStocks', (req, res) => {
             // price = Number((Object.values(obj)[10]));
             // console.log(price);
             return res.status(200).json({
+                //set price for salePrice input
                 price: obj.latestPrice
             });
 
