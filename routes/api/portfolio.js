@@ -186,7 +186,7 @@ router.get('/iexStocks', (req, res) => {
     try {
         let stocks = [];
 
-        //needs to replace ticker symbol ${ticker}/
+        //needs to replace ticker symbol ${ticker} string
 
         //pull stock info from api
         let buyStock = {

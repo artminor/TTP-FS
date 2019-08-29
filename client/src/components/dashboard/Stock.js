@@ -6,28 +6,31 @@ import Moment from 'react-moment';
 const Stock = ({ stock }) => {
   const stocks = stock.map(s => (
     <tr key={s._id}>
-      <td>{s.ticker}</td>
-      <td className="hide-sm">{s.shares}</td>
-      <td className="hide-sm">{s.salePrice}</td>
+      <td> {s.ticker} </td> <td className="hide-sm"> {s.shares} </td>{' '}
+      <td className="hide-sm"> {s.salePrice} </td>{' '}
       <td>
-        <Moment format="YYYY/MM/DD">{s.date}</Moment>
-      </td>
+        <Moment format="YYYY/MM/DD"> {s.date} </Moment>{' '}
+      </td>{' '}
+      {/* potential sell stock function
+      <td>
+        <button className="btn btn-danger">Sell</button>
+      </td> */}
     </tr>
   ));
 
   return (
     <Fragment>
-      <h2 className="my2">Stocks</h2>
+      <h2 className="my-2"> Stocks </h2>{' '}
       <table className="table">
         <thead>
           <tr>
-            <th>Ticker</th>
-            <th>Shares</th>
-            <th className="hide-sm">Purchase Price</th>
-            <th className="hide-sm">Purchase Date</th>
-          </tr>
-        </thead>
-      </table>
+            <th> Ticker </th> <th> Shares </th>{' '}
+            <th className="hide-sm"> Purchase Price </th>{' '}
+            <th className="hide-sm"> Purchase Date </th>{' '}
+          </tr>{' '}
+        </thead>{' '}
+        <tbody>{stocks}</tbody>
+      </table>{' '}
     </Fragment>
   );
 };

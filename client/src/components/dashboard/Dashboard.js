@@ -21,14 +21,13 @@ const Dashboard = ({
     <Fragment>
       <p className="lead">
         <i className="fas fa-user">
-          {' '}
           Hi {user && user.name}, you have ${user && user.cash.toFixed(2)}
         </i>
       </p>
       {portfolio !== null ? (
         <Fragment>
-          <Stock stock={portfolio.stock} />
           <DashboardActions />
+          <Stock stock={portfolio.stock} />
         </Fragment>
       ) : (
         <Fragment>
