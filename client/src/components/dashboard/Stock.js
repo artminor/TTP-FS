@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
+// import Moment from 'react-moment';
+import moment from 'moment';
 
 const Stock = ({ stock }) => {
   const stocks = stock.map(s => (
@@ -9,7 +10,8 @@ const Stock = ({ stock }) => {
       <td> {s.ticker} </td> <td className="hide-sm"> {s.shares} </td>{' '}
       <td className="hide-sm"> {s.salePrice} </td>{' '}
       <td>
-        <Moment format="YYYY/MM/DD"> {s.date} </Moment>{' '}
+        {moment(s.date).format('llll')}
+        {/* <Moment parse="YYYY-MM-DDTHH:mm"> {s.date} </Moment>{' '} */}
       </td>{' '}
       {/* potential sell stock function
       <td>
