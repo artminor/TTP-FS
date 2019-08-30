@@ -5,11 +5,11 @@ TTP FullStack Assessment
 [x]-user is able to create new account with name, email, and password<br />
 [x]-default user balance to \$5000<br />
 [x]-authenticate via email and password<br />
-[ ]-buy shares of stock at its current price by ticker symbol and number of shares<br />
+[x]-buy shares of stock at its current price by ticker symbol and number of shares<br />
 [x]-number of shares only as whole numbers<br />
 [ ]-only available to buy with enough money in account and ticker symbol is valid<br />
 [ ]-list all transactions made to date<br />
-[ ]-view list of all stocks with current value<br />
+[x]-view list of all stocks with current value<br />
 [ ]-font color change depending on stock prices<br />
 
 //dependencies<br />
