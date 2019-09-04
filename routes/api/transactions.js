@@ -35,4 +35,52 @@ router.get('/all', auth, async (req, res) => {
     }
 });
 
+
+//@route    POST api/transactions
+//@desc     add transaction
+//@access   Private
+router.post('/', auth, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            errors: errors.array()
+        });
+    }
+
+    const {} = req.body;
+
+    // //build transaction object
+    const transactionFields = {};
+    transactionFields.user = req.user.id;
+
+    try {
+        let transacitons = await Transaction.findOne({
+            user: req.user.id
+        });
+
+        if (transacitons) {
+            //update
+            transacitons = await Transaction.findOneAndUpdate({
+                user: req.user.id
+            }, {
+                $set: transactionFields
+            }, {
+                new: true
+            });
+            return res.json(transacitons);
+        }
+        console.log(transacitons);
+        //create transaciton
+        transacitons = new Transaction(transactionFields);
+        await transacitons.save();
+
+        res.json(transacitons);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+
+});
+
 module.exports = router;
