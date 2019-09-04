@@ -136,6 +136,7 @@ router.put('/stock', [auth, [
         method: 'GET'
     };
 
+
     request(buyStock, async (error, response, body) => {
         if (error) console.error(error);
 
@@ -148,7 +149,7 @@ router.put('/stock', [auth, [
         const obj = JSON.parse(body);
         // price = Number((Object.values(obj)[10]));
         // console.log(price);
-        let salePrice = obj.latestPrice
+        let salePrice = Number(obj.latestPrice.toFixed(2));
         let newStock = {
             ticker,
             shares,
@@ -160,8 +161,10 @@ router.put('/stock', [auth, [
                 user: req.user.id
             });
 
+            //save stock
             portfolio.stock.unshift(newStock);
-
+            //save as transaction
+            portfolio.transaction.unshift(newStock);
             await portfolio.save();
 
             res.json(portfolio);
@@ -171,7 +174,7 @@ router.put('/stock', [auth, [
         }
         return res.status(200).json({
             //set price for salePrice input
-            price: obj.latestPrice
+            price: Number(obj.latestPrice.toFixed(2))
         });
 
         // response.json(JSON.parse(body));
@@ -179,6 +182,8 @@ router.put('/stock', [auth, [
 
 });
 
+
+//@todo fix multiple stocks
 //@route    GET api/portfolio/iexStocks
 //@desc     get stocks from iex api
 //@access   Public
