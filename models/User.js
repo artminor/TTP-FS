@@ -13,10 +13,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    cash: {
-        type: Number,
-        default: 5000
-    },
+    // cash: {
+    //     type: Number,
+    //     default: 5000
+    // },
     date: {
         type: Date,
         default: Date.now

@@ -5,6 +5,10 @@ const PortfolioSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
+    cash: {
+        type: Number,
+        default: 5000
+    },
     stock: [{
         ticker: {
             type: String,
