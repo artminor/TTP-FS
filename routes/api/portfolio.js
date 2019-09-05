@@ -163,8 +163,11 @@ router.put('/stock', [auth, [
                 user: req.user.id
             });
 
-            //save stock
+            if (portfolio.cash < (newStock.salePrice * newStock.shares)) {
+                return res.status(200).send('Not enough cash');
+            }
             portfolio.cash -= (newStock.salePrice * newStock.shares);
+            //save stock
             portfolio.stock.unshift(newStock);
             //save as transaction
             portfolio.transaction.unshift(newStock);
@@ -184,6 +187,7 @@ router.put('/stock', [auth, [
     });
 
 });
+
 
 
 //@todo fix multiple stocks
