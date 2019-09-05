@@ -47,7 +47,7 @@ const App = () => {
             </Switch>{' '}
           </section>{' '}
         </Fragment>{' '}
-      </Router>{' '}
+      </Router>
     </Provider>
   );
 };

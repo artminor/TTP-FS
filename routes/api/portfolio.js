@@ -163,6 +163,7 @@ router.put('/stock', [auth, [
                 user: req.user.id
             });
 
+            //unable to purchase if cash is lower than stock price
             if (portfolio.cash < (newStock.salePrice * newStock.shares)) {
                 return res.status(200).send('Not enough cash');
             }
