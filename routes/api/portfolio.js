@@ -150,6 +150,8 @@ router.put('/stock', [auth, [
         // price = Number((Object.values(obj)[10]));
         // console.log(price);
         let salePrice = Number(obj.latestPrice.toFixed(2));
+
+
         let newStock = {
             ticker,
             shares,
@@ -162,6 +164,7 @@ router.put('/stock', [auth, [
             });
 
             //save stock
+            portfolio.cash -= (newStock.salePrice * newStock.shares);
             portfolio.stock.unshift(newStock);
             //save as transaction
             portfolio.transaction.unshift(newStock);
