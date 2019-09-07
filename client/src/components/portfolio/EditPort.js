@@ -27,6 +27,18 @@ const EditPort = ({
     });
   }, [loading]);
 
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     // You can await here
+  //     const portfolio = await getCurrentPort();
+  //     console.log(portfolio);
+  //     setFormData({
+  //       stock: loading || !portfolio.stock ? '' : portfolio.stock
+  //     });
+  //   }
+  //   fetchData();
+  // }, [loading]);
+
   return (
     <Fragment>
       <form className="form" onSubmit={e => onSubmit(e)}>
