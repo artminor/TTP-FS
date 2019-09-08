@@ -16,12 +16,9 @@ const Stock = ({ stock }) => {
 
   const stocks = stock.map(s => (
     <tr key={s._id}>
-      <td>company 123</td>
+      <td>{s.companyName}</td>
       <td> {s.ticker} </td>
-      <td className="hide-sm">
-        {s.shares} * ${s.salePrice}
-      </td>
-      <td className="hide-sm">${s.shares * s.salePrice}</td>
+      <td className="hide-sm">{s.shares}</td>
       <td>
         {/* {moment(s.date).format('llll')} */}
         {/* <Moment parse="YYYY-MM-DDTHH:mm"> {s.date} </Moment> */}
@@ -40,8 +37,7 @@ const Stock = ({ stock }) => {
         <thead>
           <tr>
             <th> Company</th>
-            <th> Ticker </th> <th> Shares * Price </th>
-            <th className="hide-sm"> Total Cost </th>
+            <th> Ticker </th> <th> Shares </th>
             <th className="hide-sm"> Current Value/Share </th>
             {/* <th className="hide-sm"> Purchase Date </th> */}
           </tr>

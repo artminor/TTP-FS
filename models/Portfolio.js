@@ -10,6 +10,10 @@ const PortfolioSchema = new mongoose.Schema({
         default: 5000
     },
     stock: [{
+        companyName: {
+            type: String,
+            required: true
+        },
         ticker: {
             type: String,
             required: true
@@ -28,6 +32,10 @@ const PortfolioSchema = new mongoose.Schema({
         }
     }],
     transaction: [{
+        companyName: {
+            type: String,
+            required: true
+        },
         ticker: {
             type: String,
             required: true

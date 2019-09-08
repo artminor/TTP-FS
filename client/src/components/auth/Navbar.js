@@ -12,12 +12,16 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/dashboard">
           <i className="fas fa-user" />{' '}
           <span className="hide-sm"> Portfolio </span>{' '}
-        </Link>
-      </li>
+        </Link>{' '}
+      </li>{' '}
+      <li>
+        <Link to="/transaction">
+          <i className="fas fa-credit-card" />{' '}
+          <span className="hide-sm"> Transactions </span>{' '}
+        </Link>{' '}
+      </li>{' '}
       <li>
         <a onClick={logout} href="#!">
-          {' '}
-          {/* fontawesome icon for logout */}{' '}
           <i className="fas fa-sign-out-alt" />{' '}
           <span className="hide-sm"> Logout </span>{' '}
         </a>{' '}

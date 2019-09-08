@@ -150,9 +150,11 @@ router.put('/stock', [auth, [
         // price = Number((Object.values(obj)[10]));
         // console.log(price);
         let salePrice = Number(obj.latestPrice.toFixed(2));
+        let companyName = obj.companyName;
 
 
         let newStock = {
+            companyName,
             ticker,
             shares,
             salePrice
@@ -191,7 +193,6 @@ router.put('/stock', [auth, [
 
 
 
-//@todo fix multiple stocks
 //@route    GET api/portfolio/iexStocks
 //@desc     get stocks from iex api
 //@access   Public
