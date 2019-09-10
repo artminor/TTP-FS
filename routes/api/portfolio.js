@@ -192,6 +192,30 @@ router.put('/stock', [auth, [
 });
 
 
+//@route    GET api/portfolio/transaction
+//@desc     Get current user transactions
+//@access   Private
+router.get('/transaction', auth, async (req, res) => {
+    try {
+        const transactions = await Transaction.findOne({
+            user: req.user.id
+        }).populate('user', ['name']);
+
+        //check for transactions
+        if (!transactions) {
+            return res.status(400).json({
+                msg: 'There are no transactions for this user'
+            });
+        }
+
+        //return transactions if there's one
+        res.json(transactions);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 //@route    GET api/portfolio/iexStocks
 //@desc     get stocks from iex api
@@ -232,6 +256,9 @@ router.get('/iexStocks', (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+
+
 
 
 module.exports = router;
