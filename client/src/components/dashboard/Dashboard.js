@@ -5,6 +5,7 @@ import { getCurrentPort } from '../../actions/portfolio';
 import Spinner from '../auth/Spinner';
 import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
+import Transaction from './Transaction';
 import Stock from './Stock';
 
 const Dashboard = ({

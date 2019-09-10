@@ -6,6 +6,7 @@ import moment from 'moment';
 const Transaction = ({ transaction }) => {
   const transactions = transaction.map(s => (
     <tr key={s._id}>
+      <td> {s.companyName} </td>
       <td> {s.ticker} </td>
       <td> {s.shares} </td>
       <td> {s.salePrice} </td>
@@ -22,6 +23,7 @@ const Transaction = ({ transaction }) => {
       <table className="table">
         <thead>
           <tr>
+            <th> Company </th>
             <th> Ticker </th>
             <th> Shares </th>
             <th> Price/Share </th>
