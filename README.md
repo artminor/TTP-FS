@@ -8,7 +8,7 @@ TTP FullStack Assessment
 [x]-buy shares of stock at its current price by ticker symbol and number of shares<br />
 [x]-number of shares only as whole numbers<br />
 [x]-only available to buy with enough money in account and ticker symbol is valid<br />
-[ ]-list all transactions made to date<br />
+[x]-list all transactions made to date<br />
 [x]-view list of all stocks with current value<br />
 [ ]-font color change depending on stock prices<br />
 
