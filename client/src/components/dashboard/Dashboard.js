@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
 import Transaction from './Transaction';
 import Stock from './Stock';
+// import { Container, Row, Col } from 'reactstrap';
+var Columns = require('react-columns');
 
 const Dashboard = ({
   getCurrentPort,
@@ -21,13 +23,15 @@ const Dashboard = ({
   ) : (
     <Fragment>
       <p className="lead">
-        <i className="fas fa-user">
+        <i className="fas fa-wallet">
           Hi {user && user.name}, you have $
-          {portfolio ? portfolio && portfolio.cash.toFixed(2) : '5000.00'}
+          {portfolio ? portfolio && portfolio.cash.toFixed(2) : '5000.00'} in
+          wallet.
         </i>
       </p>
       {portfolio !== null ? (
         <Fragment>
+          <td></td>
           <DashboardActions />
           <Stock stock={portfolio.stock} />
         </Fragment>

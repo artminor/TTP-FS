@@ -13,7 +13,7 @@ const EditPort = ({
   const [formData, setFormData] = useState({
     stock: []
   });
-  // const { stock } = formData;
+  const { stock } = formData;
 
   const onSubmit = e => {
     e.preventDefault();

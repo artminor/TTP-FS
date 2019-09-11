@@ -147,8 +147,6 @@ router.put('/stock', [auth, [
         }
 
         const obj = JSON.parse(body);
-        // price = Number((Object.values(obj)[10]));
-        // console.log(price);
         let salePrice = Number(obj.latestPrice.toFixed(2));
         let companyName = obj.companyName;
 
