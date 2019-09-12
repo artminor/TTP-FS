@@ -27,7 +27,7 @@ const Dashboard = ({
           </td>
           <td>
             <h2 className="my-2">
-              Cash - $
+              Hey {user && user.name}, you have $
               {portfolio ? portfolio && portfolio.cash.toFixed(2) : '5000.00'}{' '}
             </h2>
             <DashboardActions />
