@@ -6,8 +6,8 @@ import moment from 'moment';
 const Transaction = ({ transaction }) => {
   const transactions = transaction.map(s => (
     <tr key={s._id}>
-      <td> {s.companyName} </td> <td> {s.ticker} </td> <td> {s.shares} </td>{' '}
-      <td> $ {s.salePrice} </td>{' '}
+      <td> {s.companyName} </td> <td> {s.ticker.toUpperCase()} </td>{' '}
+      <td> {s.shares} </td> <td> $ {s.salePrice} </td>{' '}
       <td className="hide-sm"> $ {(s.shares * s.salePrice).toFixed(2)} </td>{' '}
       <td> {moment(s.date).format('llll')} </td>{' '}
     </tr>

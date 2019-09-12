@@ -147,15 +147,18 @@ router.put('/stock', [auth, [
         }
 
         const obj = JSON.parse(body);
+        let open;
+        obj.open == null ?
+            open = obj.previousClose : open = Number(obj.open.toFixed(2));
         let salePrice = Number(obj.latestPrice.toFixed(2));
         let companyName = obj.companyName;
-
 
         let newStock = {
             companyName,
             ticker,
             shares,
-            salePrice
+            salePrice,
+            open
         }
 
         try {
@@ -179,6 +182,7 @@ router.put('/stock', [auth, [
             console.error(err.message);
             res.status(500).send('Server Error');
         }
+
         return res.status(200).json({
             //set price for salePrice input
             price: Number(obj.latestPrice.toFixed(2))
@@ -215,45 +219,50 @@ router.get('/transaction', auth, async (req, res) => {
 });
 
 
-//@route    GET api/portfolio/iexStocks
-//@desc     get stocks from iex api
-//@access   Public
-router.get('/iexStocks', (req, res) => {
-    try {
-        let stocks = [];
+// //@route    GET api/portfolio/iexStocks/:ticker
+// //@desc     get stocks from iex api
+// //@access   Public
+// router.get('/iexStocks', async (req, res) => {
+//     try {
 
-        //needs to replace ticker symbol ${ticker} string
+//         const portfolio = await Portfolio.findOne({
+//             user: req.user.id
+//         });
 
-        //pull stock info from api
-        let buyStock = {
-            uri: `https://cloud.iexapis.com/stable/stock/GE/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
-            method: 'GET'
-        };
+//         let stocks = [];
 
-        request(buyStock, (error, response, body) => {
-            if (error) console.error(error);
+//         //needs to replace ticker symbol ${ticker} string
 
-            if (response.statusCode !== 200) {
-                return response.status(404).json({
-                    msg: 'No stock found for such ticker'
-                });
-            }
+//         //pull stock info from api
+//         let buyStock = {
+//             uri: `https://cloud.iexapis.com/stable/stock/GE/quote?token=pk_8681342999224df5bd6d757c1bd69566`,
+//             method: 'GET'
+//         };
 
-            const obj = JSON.parse(body);
-            // price = Number((Object.values(obj)[10]));
-            // console.log(price);
-            return res.status(200).json({
-                //set price for salePrice input
-                price: obj.latestPrice
-            });
+//         request(buyStock, (error, response, body) => {
+//             if (error) console.error(error);
 
-            // response.json(JSON.parse(body));
-        });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
+//             if (response.statusCode !== 200) {
+//                 return response.status(404).json({
+//                     msg: 'No stock found for such ticker'
+//                 });
+//             }
+
+//             const obj = JSON.parse(body);
+//             // price = Number((Object.values(obj)[10]));
+//             // console.log(price);
+//             return res.status(200).json({
+//                 //set price for salePrice input
+//                 price: obj.latestPrice
+//             });
+
+//             // response.json(JSON.parse(body));
+//         });
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// });
 
 
 

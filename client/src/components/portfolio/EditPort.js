@@ -25,7 +25,7 @@ const EditPort = ({
     setFormData({
       stock: loading || !portfolio.stock ? '' : portfolio.stock
     });
-  }, [loading]);
+  }, [loading, getCurrentPort]);
 
   // useEffect(() => {
   //   async function fetchData() {

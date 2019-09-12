@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { createPortfolio } from '../../actions/portfolio';
 
 const CreatePortfolio = ({ createPortfolio, history }) => {
-  const [formData, setFormData] = useState({ stock: [] });
+  const [formData, setFormData] = useState({
+    stock: []
+  });
   const { stock } = formData;
 
   const onSubmit = e => {
@@ -16,13 +18,13 @@ const CreatePortfolio = ({ createPortfolio, history }) => {
   return (
     <Fragment>
       <form className="form" onSubmit={e => onSubmit(e)}>
-        <p>Are you sure you want to create an account with us?</p>
-        <p>Possibly enter ssn...etc</p>
+        <p> Are you sure you want to create an account with us ? </p>{' '}
+        <p> Possibly enter ssn...etc </p>{' '}
         <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
-        </Link>
-      </form>
+          Go Back{' '}
+        </Link>{' '}
+      </form>{' '}
     </Fragment>
   );
 };
@@ -33,5 +35,7 @@ CreatePortfolio.propTypes = {
 
 export default connect(
   null,
-  { createPortfolio }
+  {
+    createPortfolio
+  }
 )(withRouter(CreatePortfolio));

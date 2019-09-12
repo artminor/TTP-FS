@@ -4,8 +4,10 @@ import {
 } from './alert';
 import {
     GET_PORTFOLIO,
+    // GET_STOCKS,
     PORTFOLIO_ERROR,
-    UPDATE_PORTFOLIO
+    UPDATE_PORTFOLIO,
+    // CLEAR_PORTFOLIO
 } from './types';
 
 //get user stock portfolio
@@ -27,6 +29,7 @@ export const getCurrentPort = () => async dispatch => {
         });
     }
 }
+
 
 //create portfolio
 export const createPortfolio = (formData, history) => async dispatch => {
@@ -62,7 +65,6 @@ export const createPortfolio = (formData, history) => async dispatch => {
         });
     }
 }
-
 
 //add stock
 export const addStock = (formData, history) => async dispatch => {

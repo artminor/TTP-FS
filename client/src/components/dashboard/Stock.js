@@ -1,28 +1,26 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import Moment from 'react-moment';
-import axios from 'axios';
 
 const Stock = ({ stock }) => {
-  // state={stockList:[]};
-  // let stockTickers = stock.filter(s=>s.ticker);
-  // let stockList = stockTickers.map(s =>(
-  //   axios
-  //     .get(
-  //       'https://cloud.iexapis.com/stable/stock/'+s+'/quote?token=pk_8681342999224df5bd6d757c1bd69566'
-  //     ).then(res => {this.setState({stockList:res.data})});
-  //     );
+  // let temp = 0;
+  // total = stock.map(s => <div>{(temp += s.shares * s.open)}</div>);
+  // total = temp.toFixed(2);
 
   const stocks = stock.map(s => (
-    <tr key={s._id}>
+    <tr
+      key={s._id}
+      className={
+        s.open === s.salePrice
+          ? 'grey-text'
+          : s.open < s.salePrice
+          ? 'red-text'
+          : 'green-text'
+      }
+    >
       <td>{s.companyName}</td>
-      <td> {s.ticker} </td>
+      <td> {s.ticker.toUpperCase()} </td>
       <td className="hide-sm">{s.shares}</td>
-      <td>
-        {/* {moment(s.date).format('llll')} */}
-        {/* <Moment parse="YYYY-MM-DDTHH:mm"> {s.date} </Moment> */}
-      </td>
+      <td className="hide-sm">$ {Number(s.open).toFixed(2)}</td>
       {/* potential sell stock function
       <td>
         <button className="btn btn-danger">Sell</button>
@@ -32,7 +30,10 @@ const Stock = ({ stock }) => {
 
   return (
     <Fragment>
-      <h2 className="my-2"> Stocks </h2>
+      <h2 className="my-2">
+        {' '}
+        <i className="fas fa-wallet"> Portfolio</i>
+      </h2>
       <table className="table">
         <thead>
           <tr>

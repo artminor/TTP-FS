@@ -8,6 +8,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GET_PORTFOLIO = 'GET_PORTFOLIO';
+// export const GET_STOCKS = 'GET_STOCKS';
 export const PORTFOLIO_ERROR = 'PORTFOLIO_ERROR';
 export const CLEAR_PORTFOLIO = 'CLEAR_PORTFOLIO';
 export const UPDATE_PORTFOLIO = 'UPDATE_PORTFOLIO';

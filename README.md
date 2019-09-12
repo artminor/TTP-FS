@@ -10,7 +10,7 @@ TTP FullStack Assessment
 [x]-only available to buy with enough money in account and ticker symbol is valid<br />
 [x]-list all transactions made to date<br />
 [x]-view list of all stocks with current value<br />
-[ ]-font color change depending on stock prices<br />
+[x]-font color change depending on stock prices<br />
 
 //dependencies<br />
 installation command: npm i express express-validator bcryptjs config jsonwebtoken mongoose request<br />

@@ -5,10 +5,7 @@ import { getCurrentPort } from '../../actions/portfolio';
 import Spinner from '../auth/Spinner';
 import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
-import Transaction from './Transaction';
 import Stock from './Stock';
-// import { Container, Row, Col } from 'reactstrap';
-var Columns = require('react-columns');
 
 const Dashboard = ({
   getCurrentPort,
@@ -17,23 +14,24 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentPort();
-  }, []);
+  }, [getCurrentPort]);
   return loading && portfolio == null ? (
     <Spinner />
   ) : (
     <Fragment>
-      <p className="lead">
-        <i className="fas fa-wallet">
-          Hi {user && user.name}, you have $
-          {portfolio ? portfolio && portfolio.cash.toFixed(2) : '5000.00'} in
-          wallet.
-        </i>
-      </p>
       {portfolio !== null ? (
         <Fragment>
-          <td></td>
-          <DashboardActions />
-          <Stock stock={portfolio.stock} />
+          <td>
+            {' '}
+            <Stock stock={portfolio.stock} />
+          </td>
+          <td>
+            <h2 className="my-2">
+              Cash - $
+              {portfolio ? portfolio && portfolio.cash.toFixed(2) : '5000.00'}{' '}
+            </h2>
+            <DashboardActions />
+          </td>
         </Fragment>
       ) : (
         <Fragment>

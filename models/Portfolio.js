@@ -26,6 +26,9 @@ const PortfolioSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
+        open: {
+            type: Number
+        },
         date: {
             type: Date,
             default: Date.now

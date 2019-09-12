@@ -57,6 +57,18 @@ ul {
   text-align: center;
 }
 
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+
+.grey-text {
+  color: grey;
+}
+
 .text-primary {
   color: var(--primary-color);
 }
