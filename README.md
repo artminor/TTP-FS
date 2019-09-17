@@ -6,6 +6,7 @@ TTP FullStack Assessment
 [x]-default user balance to \$5000<br />
 [x]-authenticate via email and password<br />
 [x]-buy shares of stock at its current price by ticker symbol and number of shares<br />
+  @todo [ ]if stock exist, then update instead of add </br>
 [x]-number of shares only as whole numbers<br />
 [x]-only available to buy with enough money in account and ticker symbol is valid<br />
 [x]-list all transactions made to date<br />
